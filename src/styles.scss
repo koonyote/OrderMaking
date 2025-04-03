@@ -2,3 +2,16 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+.btn:active {
+    transform: scale(0.98);
+    transition: transform 0.1s;
+  }
+
+  input, select, textarea {
+    font-size: 16px; /* ป้องกัน zoom บน iOS */
+  }
+  
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
