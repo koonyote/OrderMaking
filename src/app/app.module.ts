@@ -7,13 +7,15 @@ import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartComponent } from './cart/cart.component';
 import { MenuComponent } from './menu/menu.component';
+import { GroupOrderComponent } from './group-order/group-order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CartComponent,
-    MenuComponent
+    MenuComponent,
+    GroupOrderComponent
   ],
   imports: [
     BrowserModule,

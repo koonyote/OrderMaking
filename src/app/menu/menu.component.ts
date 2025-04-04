@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CartService } from '../service/cart.service';
 
 interface MenuItem {
@@ -15,6 +15,10 @@ interface MenuItem {
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent implements OnInit {
+  @Input() isGroupMode: boolean = false;
+  @Input() currentMember: any;
+  @Output() itemAdded = new EventEmitter<any>();
+  
   categories: string[] = ['ทั้งหมด', 'อาหารไทย', 'อาหารจีน', 'เครื่องดื่ม', 'ของหวาน'];
   selectedCategory = 'ทั้งหมด';
 
@@ -38,6 +42,7 @@ export class MenuComponent implements OnInit {
     this.updateCartCount();
   }
 
+
   get filteredItems(): MenuItem[] {
     if (this.selectedCategory === 'ทั้งหมด') {
       return this.menuItems;
@@ -49,15 +54,25 @@ export class MenuComponent implements OnInit {
     this.selectedCategory = category;
   }
 
-  addToCart(item: MenuItem): void {
-    this.cartService.addToCart({
-      id: item.id,
-      name: item.name,
-      price: item.price,
-      quantity: 1,
-      image: item.image
-    });
-    this.updateCartCount();
+  addToCart(item: any): void {
+    if (this.isGroupMode) {
+      this.itemAdded.emit({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: 1
+      });
+    } else {
+      // โหมดปกติ
+      this.cartService.addToCart({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: 1,
+        image: item.image
+      });
+      this.updateCartCount();
+    }
   }
 
   updateCartCount(): void {

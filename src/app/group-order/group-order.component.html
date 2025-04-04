@@ -1,0 +1,66 @@
+<div class="container-fluid" style="max-width: 800px; margin: auto;">
+    <!-- สถานะกลุ่ม -->
+    <div class="card mb-3">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">กลุ่ม: {{groupName}}</h5>
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <span>สถานะ: <strong>{{isGroupLeader ? 'หัวหน้า' : 'สมาชิก'}}</strong></span>
+          <span>สมาชิก: <strong>{{members.length}} คน</strong></span>
+        </div>
+      </div>
+    </div>
+  
+    <!-- เมนูอาหาร -->
+    <div class="card mb-3">
+      <div class="card-header bg-light">
+        <h5 class="mb-0">เมนูอาหาร</h5>
+      </div>
+      <div class="card-body">
+        <app-menu [isGroupMode]="true" [currentMember]="currentMember" (itemAdded)="onItemAdded($event)"></app-menu>
+      </div>
+    </div>
+  
+    <!-- สรุปออเดอร์ของกลุ่ม -->
+    <div class="card mb-3">
+      <div class="card-header bg-light">
+        <h5 class="mb-0">สรุปออเดอร์กลุ่ม</h5>
+      </div>
+      <div class="card-body">
+        <div *ngFor="let member of members" class="mb-3">
+          <h6>{{member.name}} 
+            <span *ngIf="member.id === currentMember.id" class="badge bg-info">คุณ</span>
+            <span *ngIf="member.id === groupLeaderId" class="badge bg-warning">หัวหน้า</span>
+          </h6>
+          <ul class="list-group">
+            <li *ngFor="let item of member.orders" class="list-group-item d-flex justify-content-between">
+              <span>{{item.name}} ({{item.quantity}})</span>
+              <span class="text-danger">{{item.price * item.quantity | currency:'THB '}}</span>
+            </li>
+            <li *ngIf="member.orders.length === 0" class="list-group-item text-muted">
+              ยังไม่ได้เลือกเมนู
+            </li>
+            <li class="list-group-item list-group-item-secondary d-flex justify-content-between">
+              <strong>รวม</strong>
+              <strong>{{getMemberTotal(member) | currency:'THB '}}</strong>
+            </li>
+          </ul>
+        </div>
+  
+        <div class="total-section p-3 bg-light rounded">
+          <div class="d-flex justify-content-between mb-2">
+            <span>รวมทั้งหมด:</span>
+            <span class="fw-bold">{{getGroupTotal() | currency:'THB '}}</span>
+          </div>
+          <div *ngIf="isGroupLeader" class="d-grid gap-2">
+            <button class="btn btn-primary" (click)="checkout()">ดำเนินการชำระเงิน</button>
+            <button class="btn btn-outline-danger" (click)="closeGroup()">ปิดกลุ่ม</button>
+          </div>
+          <div *ngIf="!isGroupLeader" class="alert alert-info">
+            รอหัวหน้ากลุ่มดำเนินการชำระเงิน
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
