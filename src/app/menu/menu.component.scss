@@ -1,0 +1,27 @@
+/* ปรับแต่งปุ่มหมวดหมู่ */
+.btn-outline-secondary {
+    white-space: nowrap;
+}
+
+/* ปรับการแสดงผลการ์ดเมนู */
+.card {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ปรับรูปภาพในเมนู */
+.card-img-top {
+    border-bottom: 1px solid #eee;
+}
+
+/* ปุ่มดูตะกร้า */
+.sticky-bottom {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+}

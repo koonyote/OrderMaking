@@ -1,1 +1,38 @@
-<p>menu works!</p>
+<div class="container-fluid p-0" style="max-width: 480px; margin: auto; background-color: #f5f5f5;">
+    <!-- ส่วนหัว -->
+    <div class="bg-primary text-white p-3 sticky-top">
+      <h5 class="mb-0 text-center">เมนูอาหาร</h5>
+    </div>
+  
+    <!-- หมวดหมู่เมนู -->
+    <div class="p-3">
+      <div class="d-flex overflow-auto mb-3">
+        <button *ngFor="let category of categories" 
+                class="btn btn-outline-secondary me-2"
+                [class.active]="selectedCategory === category"
+                (click)="selectCategory(category)">
+          {{category}}
+        </button>
+      </div>
+  
+      <!-- รายการอาหาร -->
+      <div class="row">
+        <div class="col-6 mb-3" *ngFor="let item of filteredItems">
+          <div class="card h-100" (click)="addToCart(item)">
+            <img [src]="item.image" class="card-img-top" style="height: 120px; object-fit: cover;" alt="{{item.name}}">
+            <div class="card-body p-2">
+              <h6 class="card-title mb-1">{{item.name}}</h6>
+              <p class="card-text text-danger mb-1">{{item.price | currency:'THB '}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- ปุ่มดูตะกร้า -->
+    <div class="sticky-bottom bg-white border-top p-2 text-center">
+      <button class="btn btn-primary w-100" routerLink="/cart">
+        ดูตะกร้า ({{cartItemCount}})
+      </button>
+    </div>
+  </div>

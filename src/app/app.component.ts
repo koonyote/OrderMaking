@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartService } from './service/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'order-group';
+
+  cartItemCount = 0;
+
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.updateCartCount();
+  }
+
+  updateCartCount(): void {
+    this.cartItemCount = this.cartService.getTotalItems();
+  }
 }

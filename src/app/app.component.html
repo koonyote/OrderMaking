@@ -1,1 +1,10 @@
-<router-outlet />
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">ร้านอาหาร</a>
+      <a class="btn btn-outline-light" routerLink="/cart">
+        ตะกร้า ({{cartItemCount}})
+      </a>
+    </div>
+  </nav>
+  
+  <router-outlet></router-outlet>
