@@ -82,7 +82,7 @@ export class CartComponent {
   }
 
   checkout(): void {
-    alert('ระบบชำระเงินจะถูกพัฒนาต่อในอนาคต');
+    // alert('ระบบชำระเงินจะถูกพัฒนาต่อในอนาคต');
   }
 
   continueShopping(): void {
